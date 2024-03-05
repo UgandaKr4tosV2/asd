@@ -174,12 +174,7 @@ void win(struct Persona *Persona) {
 
 void perde(){
     cout<<"você perdeu"<<endl;
-    //ficha();
 }
-
-/*void ganharExperiencia(struct Persona *Persona) {
-
-}*/
 
 void luta(struct Persona Persona, int ataqueOpo, int def, int hpOpo) {
     do{
@@ -197,7 +192,7 @@ void luta(struct Persona Persona, int ataqueOpo, int def, int hpOpo) {
    		 if (hpOpo <= 0){
    		     Persona.xp += 10;
        		 win(&Persona);
-       		 break;
+             break;
    		 }
    		 else if (Persona.hp <= 0){
        		 perde();
@@ -220,17 +215,23 @@ void luta(struct Persona Persona, int ataqueOpo, int def, int hpOpo) {
 
 }
 
+
 int main() {
     int classe,hp, att, def,ataqueOpo,defesaOpo,hpOpo;
     struct Persona Heroi;
     classe = ficha(&Heroi);
 
+    do{
+        if (Heroi.hp < 0){
+            classe = ficha(&Heroi);
+        }
 
-    tie(att, def, hp) = ValoresOponente(10, 15, 15);
-    tie (ataqueOpo,defesaOpo,hpOpo) = ValoresOponente(att,def,hp);
+        tie(att, def, hp) = ValoresOponente(10, 15, 15);
+        tie (ataqueOpo,defesaOpo,hpOpo) = ValoresOponente(att,def,hp);
 
-    EscolherOpo(Heroi, &att, &def, &hp);
-    luta(Heroi,ataqueOpo,defesaOpo,hpOpo);
+        EscolherOpo(Heroi, &att, &def, &hp);
+        luta(Heroi,ataqueOpo,defesaOpo,hpOpo);
+    }while(1);
 
     return 0;
 }
